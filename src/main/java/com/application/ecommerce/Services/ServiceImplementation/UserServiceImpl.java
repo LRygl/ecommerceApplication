@@ -3,6 +3,7 @@ package com.application.ecommerce.Services.ServiceImplementation;
 import com.application.ecommerce.Model.User;
 import com.application.ecommerce.Repository.UserRepository;
 import com.application.ecommerce.Services.UserService;
+import lombok.Builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,15 @@ public class UserServiceImpl implements UserService {
     }
 
 
+
     @Override
     public List<User> getAllUsers() {return userRepository.findAll();}
 
+    @Override
+    public User findUserById(Long id){
+        return userRepository.findUserById(id);
+    }
+
+    @Override
+    public void deleteUserById(Long id){userRepository.deleteById(id);}
 }
