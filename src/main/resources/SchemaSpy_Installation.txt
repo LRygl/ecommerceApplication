@@ -1,0 +1,8 @@
+https://schemaspy.org
+
+java -jar schemaspy-6.1.0.jar -t pgsql -db ecommerce  -host localhost -port 5432 -u postgres -p sphingalama33 -o ./schemaspy -dp postgresql-42.2.23.jar -s public -noads
+
+https://jdbc.postgresql.org/download.html - download PostgreSQL JDBC 4.2 Driver, 42.2.23
+https://github.com/schemaspy/schemaspy/releases/tag/v6.1.0 - download schemaspy-6.1.0.ja
+
+
