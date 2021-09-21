@@ -1,4 +1,28 @@
 package com.application.ecommerce.Services.ServiceImplementation;
 
-public class ProductServiceImpl {
+import com.application.ecommerce.Model.Product;
+import com.application.ecommerce.Repository.ProductRepository;
+import com.application.ecommerce.Services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+
+@Service
+@Transactional
+@Qualifier("ProductDetailService")
+public class ProductServiceImpl implements ProductService {
+    private ProductRepository productRepository;
+
+    @Autowired
+    public  ProductServiceImpl(ProductRepository productRepository){
+        this.productRepository = productRepository;
+    }
+
+    @Override
+    public List<Product> getAllProducts() {return productRepository.findAll();}
+
+
 }

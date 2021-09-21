@@ -1,16 +1,17 @@
 package com.application.ecommerce.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name="product_category")
 public class ProductCategory {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String CategoryName;
-    private Date CategoryNameAdded;
+    private Date CategoryNameAdded = new Date();
+    private Boolean isCategoryActive;
 
     public ProductCategory() {
     }
