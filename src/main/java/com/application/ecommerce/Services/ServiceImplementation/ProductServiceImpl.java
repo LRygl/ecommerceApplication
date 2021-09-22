@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,5 +25,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getAllProducts() {return productRepository.findAll();}
 
+    @Override
+    public Product addNewProduct(String productName){
+        Product product = new Product();
+        product.setProductName(productName);
+        product.setProductCreated(new Date());
+        productRepository.save(product);
+        return product;
+    }
 
 }
