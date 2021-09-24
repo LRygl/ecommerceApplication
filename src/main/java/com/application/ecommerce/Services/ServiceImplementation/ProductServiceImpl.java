@@ -26,12 +26,19 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAllProducts() {return productRepository.findAll();}
 
     @Override
-    public Product addNewProduct(String productName){
+    public Product addNewProduct(String productName, String productNumber ){
+
         Product product = new Product();
         product.setProductName(productName);
+        product.setProductNumber(productNumber);
         product.setProductCreated(new Date());
         productRepository.save(product);
         return product;
+    }
+
+    @Override
+    public Product findByProductName(String productName){
+        return productRepository.findByProductName(productName);
     }
 
 }

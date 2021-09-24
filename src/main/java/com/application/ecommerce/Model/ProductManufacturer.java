@@ -12,6 +12,7 @@ public class ProductManufacturer {
     private String productManufacturerName;
     private Date productManufacturerCreated;
 
+
     public ProductManufacturer() {
     }
 
