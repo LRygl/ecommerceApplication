@@ -45,12 +45,6 @@ public class ProductResource {
         return product;
     }
 
-    @PostMapping(path = "products/update")
-    public ResponseEntity<Product> updateProduct(@RequestParam("productName") String productName){
-        Product updatedProduct = productService.updateProduct(productName);
-        return new ResponseEntity<>(updatedProduct,HttpStatus.OK);
-    }
-
     @PostMapping(
             value = "/products/add",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
