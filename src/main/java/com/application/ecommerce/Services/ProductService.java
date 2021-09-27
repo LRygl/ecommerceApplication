@@ -11,6 +11,7 @@ public interface ProductService {
 
     Optional<Product> findById(Long Id);
 
+    Product updateProduct(String productName);
     Product addNewProduct(String productName, String productNumber);
     Product findByProductName(String productName);
 
