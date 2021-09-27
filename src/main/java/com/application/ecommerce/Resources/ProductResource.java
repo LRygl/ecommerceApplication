@@ -1,5 +1,6 @@
 package com.application.ecommerce.Resources;
 
+import com.application.ecommerce.Model.HttpResponse;
 import com.application.ecommerce.Model.Product;
 import com.application.ecommerce.Services.ProductService;
 import com.application.ecommerce.Services.UserService;
@@ -11,7 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/v1")
@@ -24,16 +27,22 @@ public class ProductResource {
         this.productService = productService;
     }
 
-    @GetMapping(path = "/products")
+    @GetMapping(path = "/products/all")
     public ResponseEntity<List<Product>> getAllProducts(){
         List<Product> products = productService.getAllProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/products/{productName}")
-    public ResponseEntity<Product> getProduct(@PathVariable("productName") String productName){
+    @GetMapping(path = "/products")
+    public ResponseEntity<Product> getProduct(@RequestParam(name = "name") String productName){
         Product product = productService.findByProductName(productName);
         return new ResponseEntity<>(product,HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/products/{Id}")
+    public Optional<Product> getProductById(@PathVariable Long Id){
+        Optional<Product> product = productService.findById(Id);
+        return product;
     }
 
     @PostMapping(
@@ -45,5 +54,15 @@ public class ProductResource {
         return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
     }
 
+
+    @DeleteMapping(path = "/products/delete/{id}")
+    public ResponseEntity<HttpResponse> deleteUser(@PathVariable("id") Long Id){
+        productService.deleteProduct(Id);
+        return response(HttpStatus.NO_CONTENT,"Message");
+    }
+
+    private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message){
+        return new ResponseEntity<>(new HttpResponse(httpStatus.value(),httpStatus,httpStatus.getReasonPhrase().toUpperCase(),message.toUpperCase()),httpStatus);
+    }
 
 }

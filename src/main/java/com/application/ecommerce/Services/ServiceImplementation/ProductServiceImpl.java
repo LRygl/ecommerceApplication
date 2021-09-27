@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -24,6 +25,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllProducts() {return productRepository.findAll();}
+
+    @Transactional
+    public Optional<Product> findById(Long Id){
+        Optional<Product> product = productRepository.findById(Id);
+        return product;
+    }
+
+    @Override
+    public void deleteProduct(Long Id){
+        productRepository.deleteById(Id);
+    }
 
     @Override
     public Product addNewProduct(String productName, String productNumber ){
