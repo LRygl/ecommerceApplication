@@ -48,12 +48,6 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
-
-    @Override
-    public Product updateProduct(String productName){
-        Product currentProduct =
-    }
-
     @Override
     public Product findByProductName(String productName){
         return productRepository.findByProductName(productName);
