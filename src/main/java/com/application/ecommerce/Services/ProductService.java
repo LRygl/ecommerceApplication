@@ -1,6 +1,7 @@
 package com.application.ecommerce.Services;
 
 import com.application.ecommerce.Model.Product;
+import com.application.ecommerce.Model.Requests.ProductRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,8 @@ public interface ProductService {
 
     Optional<Product> findById(Long Id);
 
-    Product addNewProduct(String productName, String productNumber);
+/*    Product addNewProduct(Product product);*/
+    Product addNewProduct(ProductRequest product);
     Product findByProductName(String productName);
 
     void deleteProduct(Long Id);

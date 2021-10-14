@@ -2,6 +2,7 @@ package com.application.ecommerce.Resources;
 
 import com.application.ecommerce.Model.HttpResponse;
 import com.application.ecommerce.Model.Product;
+import com.application.ecommerce.Model.Requests.ProductRequest;
 import com.application.ecommerce.Services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -59,13 +60,24 @@ public class ProductResource {
         Optional<Product> product = productService.findById(Id);
         return product;
     }
+/*
 
     @PostMapping(
             value = "/products/add",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Product> addNewProduct(@RequestBody Product product){
-        Product newProduct = productService.addNewProduct(product.getProductName(),product.getProductNumber());
+        Product newProduct = productService.addNewProduct(product);
+        return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
+    }
+*/
+
+    @PostMapping(
+            value = "/products/add",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<Product> addNewProduct(@RequestBody ProductRequest product){
+        Product newProduct = productService.addNewProduct(product);
         return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
     }
 

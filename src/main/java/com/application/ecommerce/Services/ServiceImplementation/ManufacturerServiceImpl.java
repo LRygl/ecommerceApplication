@@ -1,6 +1,7 @@
 package com.application.ecommerce.Services.ServiceImplementation;
 
 import com.application.ecommerce.Model.ProductManufacturer;
+import com.application.ecommerce.Model.Requests.ProductRequest;
 import com.application.ecommerce.Repository.ManufacturerRepository;
 import com.application.ecommerce.Services.ManufacturerService;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class ManufacturerServiceImpl implements ManufacturerService {
 
     private ManufacturerRepository manufacturerRepository;
+    private ProductRequest productRequest;
 
     public ManufacturerServiceImpl(ManufacturerRepository manufacturerRepository) {
         this.manufacturerRepository = manufacturerRepository;
