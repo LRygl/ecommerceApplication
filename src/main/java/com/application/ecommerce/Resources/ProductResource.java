@@ -3,7 +3,7 @@ package com.application.ecommerce.Resources;
 import com.application.ecommerce.Model.HttpResponse;
 import com.application.ecommerce.Model.Product;
 import com.application.ecommerce.Services.ProductService;
-import com.application.ecommerce.Services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +12,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
-import java.util.List;
+
+import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/v1")
+@RequiredArgsConstructor
 public class ProductResource {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
@@ -27,10 +29,23 @@ public class ProductResource {
         this.productService = productService;
     }
 
-    @GetMapping(path = "/products/all")
+/*    @GetMapping(path = "/products/all")
     public ResponseEntity<List<Product>> getAllProducts(){
         List<Product> products = productService.getAllProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
+    }*/
+
+    @GetMapping(path = "/products/all")
+    public ResponseEntity<HttpResponse> getAllProducts(){
+        return ResponseEntity.ok(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .data(Map.of("products",productService.getAllProducts(30)))
+                        .message("Servers retrieved")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
     }
 
     @GetMapping(path = "/products")
@@ -55,14 +70,10 @@ public class ProductResource {
     }
 
 
-    @DeleteMapping(path = "/products/delete/{id}")
+/*    @DeleteMapping(path = "/products/delete/{id}")
     public ResponseEntity<HttpResponse> deleteUser(@PathVariable("id") Long Id){
         productService.deleteProduct(Id);
         return response(HttpStatus.NO_CONTENT,"Message");
     }
-
-    private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message){
-        return new ResponseEntity<>(new HttpResponse(httpStatus.value(),httpStatus,httpStatus.getReasonPhrase().toUpperCase(),message.toUpperCase()),httpStatus);
-    }
-
+    */
 }

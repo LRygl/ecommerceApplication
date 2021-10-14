@@ -38,7 +38,7 @@ public class UserResource {
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/user/delete/{id}")
+/*    @DeleteMapping(path = "/user/delete/{id}")
     public ResponseEntity<HttpResponse> deleteUserById(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
         return customHttpResponse(HttpStatus.NO_CONTENT, "User deleted succesfully");
@@ -46,5 +46,5 @@ public class UserResource {
 
     private ResponseEntity<HttpResponse> customHttpResponse(HttpStatus httpStatus, String messageContent){
         return new ResponseEntity<>(new HttpResponse(httpStatus.value(),httpStatus, httpStatus.getReasonPhrase().toUpperCase(),messageContent.toUpperCase()), httpStatus);
-    }
+    }*/
 }
