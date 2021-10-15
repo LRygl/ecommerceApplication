@@ -1,10 +1,10 @@
 package com.application.ecommerce.Model;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Optional;
 
 @Entity
 @Table(name="Product")
@@ -84,13 +84,9 @@ public class Product {
         this.productColour = productColour;
     }
 
-    public ProductManufacturer getProductManufacturer() {
-        return productManufacturer;
-    }
+    public ProductManufacturer getProductManufacturer() { return productManufacturer; }
 
-    public void setProductManufacturer(ProductManufacturer productManufacturer) {
-        this.productManufacturer = productManufacturer;
-    }
+    public void setProductManufacturer(ProductManufacturer productManufacturer) { this.productManufacturer = productManufacturer; }
 
     public Integer getProductQuantity() {
         return productQuantity;

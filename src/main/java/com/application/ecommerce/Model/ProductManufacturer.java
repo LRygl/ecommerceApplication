@@ -5,6 +5,15 @@ import java.util.Date;
 
 @Entity
 @Table(name="product_manufacturer")
+@SqlResultSetMapping(
+        name = "ManufacturerSqlResultSetMapping",
+        classes = @ConstructorResult(targetClass = ProductManufacturer.class,columns =
+                {
+                        @ColumnResult(name="id",type = Long.class),
+                        @ColumnResult(name = "productManufacturerName",type = String.class),
+                        @ColumnResult(name = "productManufacturerCreated",type = Date.class)
+                })
+)
 public class ProductManufacturer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
