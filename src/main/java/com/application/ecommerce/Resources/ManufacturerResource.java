@@ -6,9 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/v1")
@@ -26,11 +24,17 @@ public class ManufacturerResource {
         return new ResponseEntity<>(productManufacturers, HttpStatus.OK);
     }
 
-    @GetMapping("/manufacturers/{Id}")
-    public  Optional<ProductManufacturer> getByProductManufacturerId(@PathVariable Long Id){
-     Optional<ProductManufacturer> productManufacturers = manufacturerService.findById(Id);
+/*    @GetMapping("/manufacturers/{Id}")
+    public  ProductManufacturer getByProductManufacturerId(@PathVariable Long Id){
+     ProductManufacturer productManufacturers = manufacturerService.findById(Id);
        return productManufacturers;
 
+    }*/
+
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<ProductManufacturer> getManufacturerById(@PathVariable Long id){
+        ProductManufacturer productManufacturer = manufacturerService.findManufacturerById(id);
+        return new ResponseEntity<ProductManufacturer>(productManufacturer, HttpStatus.OK);
     }
 
     @PostMapping("/manufacturers/add")

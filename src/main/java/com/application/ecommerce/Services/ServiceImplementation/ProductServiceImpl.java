@@ -23,27 +23,35 @@ public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepository;
     private ManufacturerRepository manufacturerRepository;
-    private ProductRequest productRequest;
+
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, ManufacturerRepository manufacturerRepository, ProductRequest productRequest) {
+    public ProductServiceImpl(ProductRepository productRepository, ManufacturerRepository manufacturerRepository) {
         this.manufacturerRepository = manufacturerRepository;
-        this.productRequest = productRequest;
+
         this.productRepository = productRepository;
     }
-
-
-
-
 
     @Override
     public List<Product> getAllProducts(int limit) {return productRepository.findAll(PageRequest.of(0,limit)).toList();}
 
+    @Override
+    public Product findById(Long Id) {
+        return null;
+    }
+
+    @Override
+    public Product addNewProduct(ProductRequest product) {
+        return null;
+    }
+
+/*
     @Transactional
-    public Optional<Product> findById(Long Id){
-        Optional<Product> product = productRepository.findById(Id);
+    public Product findById(Long Id){
+        Product product = productRepository.findById(Id);
         return product;
     }
+*/
 
     @Override
     public void deleteProduct(Long Id){
@@ -69,12 +77,19 @@ public class ProductServiceImpl implements ProductService {
         return newProduct;
     }*/
 
-    @Override
+ /*   @Override
     public Product addNewProduct(ProductRequest productRequest){
         ProductManufacturer manufacturer = manufacturerRepository.findById(productRequest.manufacturerId);
-        return null;
-    }
+        Product product = new Product();
 
+        product.setProductName(productRequest.productName);
+        product.setProductCreated(new Date());
+        product.setProductManufacturer(manufacturer);
+        productRepository.save(product);
+        var currentProductId = product.GetProduct();
+        return product;
+    }
+*/
     @Override
     public Product findByProductName(String productName){
         return productRepository.findByProductName(productName);

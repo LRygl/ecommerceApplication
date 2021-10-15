@@ -10,7 +10,7 @@ public interface ProductService {
 
     List<Product> getAllProducts(int limit);
 
-    Optional<Product> findById(Long Id);
+    Product findById(Long Id);
 
 /*    Product addNewProduct(Product product);*/
     Product addNewProduct(ProductRequest product);
