@@ -10,11 +10,14 @@ public interface ProductService {
 
     List<Product> getAllProducts(int limit);
 
-    Product findById(Long Id);
 
 /*    Product addNewProduct(Product product);*/
     Product addNewProduct(ProductRequest product);
+
+    //FIND METHODS
     Product findByProductName(String productName);
+    Product findProductById(Long id);
+
 
     void deleteProduct(Long Id);
 }

@@ -1,26 +1,17 @@
 package com.application.ecommerce.Model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name="product_manufacturer")
-@SqlResultSetMapping(
-        name = "ManufacturerSqlResultSetMapping",
-        classes = @ConstructorResult(targetClass = ProductManufacturer.class,columns =
-                {
-                        @ColumnResult(name="id",type = Long.class),
-                        @ColumnResult(name = "productManufacturerName",type = String.class),
-                        @ColumnResult(name = "productManufacturerCreated",type = Date.class)
-                })
-)
-public class ProductManufacturer {
+public class ProductManufacturer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String productManufacturerName;
     private Date productManufacturerCreated;
-
 
     public ProductManufacturer() {
     }

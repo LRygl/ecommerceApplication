@@ -36,22 +36,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAllProducts(int limit) {return productRepository.findAll(PageRequest.of(0,limit)).toList();}
 
     @Override
-    public Product findById(Long Id) {
-        return null;
-    }
-
-    @Override
     public Product addNewProduct(ProductRequest product) {
         return null;
     }
-
-/*
-    @Transactional
-    public Product findById(Long Id){
-        Product product = productRepository.findById(Id);
-        return product;
-    }
-*/
 
     @Override
     public void deleteProduct(Long Id){
@@ -95,4 +82,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByProductName(productName);
     }
 
+    @Override
+    public Product findProductById(Long id){return productRepository.findProductById(id);}
 }

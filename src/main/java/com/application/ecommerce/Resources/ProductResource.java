@@ -55,11 +55,11 @@ public class ProductResource {
         return new ResponseEntity<>(product,HttpStatus.OK);
     }
 
-/*    @GetMapping(path = "/products/{Id}")
-    public Optional<Product> getProductById(@PathVariable Long Id){
-        Optional<Product> product = productService.findById(Id);
+    @GetMapping(path = "/products/{Id}")
+    public Product getProductById(@PathVariable Long Id){
+        Product product = productService.findProductById(Id);
         return product;
-    }*/
+    }
 /*
 
     @PostMapping(

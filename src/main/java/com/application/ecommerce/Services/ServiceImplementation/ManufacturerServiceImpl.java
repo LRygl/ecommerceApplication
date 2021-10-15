@@ -3,11 +3,15 @@ package com.application.ecommerce.Services.ServiceImplementation;
 import com.application.ecommerce.Model.ProductManufacturer;
 import com.application.ecommerce.Repository.ManufacturerRepository;
 import com.application.ecommerce.Services.ManufacturerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +19,7 @@ import java.util.List;
 @Service
 @Transactional
 public class ManufacturerServiceImpl implements ManufacturerService {
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     private ManufacturerRepository manufacturerRepository;
     private final EntityManager entityManager;
@@ -28,10 +33,9 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     public List<ProductManufacturer> getAllManufacturers() {return manufacturerRepository.findAll();}
 
- /*   @Override
+/*    @Override
     public ProductManufacturer findById(Long Id){
-        ProductManufacturer productManufacturer = manufacturerRepository.findById(Id);
-        return productManufacturer;
+        return manufacturerRepository.findById(Id);
     }*/
 
 
@@ -47,13 +51,35 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     @Transactional
     public ProductManufacturer findManufacturerById(Long id) {
-
-        final String query;
-        query = "SELECT pm.id AS id,pm.product_manufacturer_name AS productManufacturerName,pm.product_manufacturer_created AS productManufacturerCreated FROM product_manufacturer pm WHERE id = 1";
-        ProductManufacturer manufacturer = (ProductManufacturer) entityManager.createNativeQuery(query, "ManufacturerSqlResultSetMapping").setParameter("id", 1).getSingleResult();
-
-        return manufacturer;
+        ProductManufacturer productManufacturer = (ProductManufacturer) manufacturerRepository.findManufacturerById(id);
+        if(productManufacturer == null){
+            logger.info("No Manufacturer with ID = " + id + " was found - Return NotFoundException");
+            throw new EntityNotFoundException("Not Found");
+        } else {
+            return productManufacturer;
+        }
     }
+
+/*
+    @Override
+    public ProductManufacturer findManufacturerById(Long id) {
+
+        Query q = entityManager.createNativeQuery("SELECT pm.id AS id,pm.product_manufacturer_name AS productManufacturerName,pm.product_manufacturer_created AS productManufacturerCreated FROM product_manufacturer pm","findManufacturerById");
+        var query = "SELECT pm.id AS id,pm.product_manufacturer_name AS productManufacturerName,pm.product_manufacturer_created AS productManufacturerCreated FROM product_manufacturer pm";
+        ProductManufacturer manufacturer = entityManager.createNativeQuery(query, "findManufacturerById").getSingleResult();
+
+        if (manufacturer == null){
+            throw new EntityNotFoundException("Manufacturer with ID " + id + "Was NOT found in the database");
+        } else {
+            return manufacturer;
+        }
+
+    }
+
+*/
+
+
+
     //TODO add deleteManufacturerById
     //TODO Add method for updateManufacturerById
 }
