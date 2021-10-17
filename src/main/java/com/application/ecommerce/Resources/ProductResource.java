@@ -5,6 +5,7 @@ import com.application.ecommerce.Model.Product;
 import com.application.ecommerce.Model.Requests.ProductRequest;
 import com.application.ecommerce.Services.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.jni.Local;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +24,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductResource {
     private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private ProductService productService;
 
     public ProductResource(ProductService productService) {
         this.productService = productService;
     }
-
-/*    @GetMapping(path = "/products/all")
-    public ResponseEntity<List<Product>> getAllProducts(){
-        List<Product> products = productService.getAllProducts();
-        return new ResponseEntity<>(products, HttpStatus.OK);
-    }*/
 
     @GetMapping(path = "/products/all")
     public ResponseEntity<HttpResponse> getAllProducts(){
@@ -50,9 +46,23 @@ public class ProductResource {
     }
 
     @GetMapping(path = "/products")
-    public ResponseEntity<Product> getProduct(@RequestParam(name = "name") String productName){
-        Product product = productService.findByProductName(productName);
-        return new ResponseEntity<>(product,HttpStatus.OK);
+    public ResponseEntity<HttpResponse> findByProductName(@RequestParam(name = "name") String productName){
+/*      Product product = productService.findByProductName(productName);
+        return new ResponseEntity<>(product,HttpStatus.OK);*/
+        try {
+            return ResponseEntity.ok(
+                    HttpResponse.builder()
+                            .timeStamp(LocalDateTime.now())
+                            .data(Map.of("product",productService.findByProductName(productName)))
+                            .message("message")
+                            .status(HttpStatus.OK)
+                            .statusCode(HttpStatus.OK.value())
+                            .build()
+            );
+        } catch (Exception e) {
+            logger.info("Exception");
+            return null;
+        }
     }
 
     @GetMapping(path = "/products/{Id}")
