@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 @Transactional
 public class CategoryServiceImpl implements ProductCategoryService {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private ProductCategoryRepository productCategoryRepository;
 
     public CategoryServiceImpl(ProductCategoryRepository productCategoryRepository) {

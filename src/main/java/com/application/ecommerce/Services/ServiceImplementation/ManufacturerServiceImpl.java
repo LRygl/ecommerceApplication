@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 @Transactional
 public class ManufacturerServiceImpl implements ManufacturerService {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private ManufacturerRepository manufacturerRepository;
     private final EntityManager entityManager;
