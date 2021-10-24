@@ -10,7 +10,6 @@ public interface ProductService {
 
     List<Product> getAllProducts(int limit);
 
-
 /*    Product addNewProduct(Product product);*/
     Product addNewProduct(ProductRequest product);
 

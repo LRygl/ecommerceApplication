@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Long> {
 
-    @Query(value = "",nativeQuery = true)
+    @Query(value = "SELECT * FROM product_category WHERE id = :id ",nativeQuery = true)
     ProductCategory findProductCategoryById(Long id);
 
 }

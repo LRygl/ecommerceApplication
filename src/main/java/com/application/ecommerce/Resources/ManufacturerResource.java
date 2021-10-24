@@ -3,7 +3,6 @@ package com.application.ecommerce.Resources;
 import com.application.ecommerce.Model.HttpResponse;
 import com.application.ecommerce.Model.ProductManufacturer;
 import com.application.ecommerce.Services.ManufacturerService;
-import jdk.javadoc.doclet.Reporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -24,10 +23,7 @@ public class ManufacturerResource {
     }
 
     @GetMapping("/manufacturers")
-    public ResponseEntity<?> getAllManufacturers(){
- /*      List<ProductManufacturer> productManufacturers = manufacturerService.getAllManufacturers();
-        return new ResponseEntity<>(productManufacturers, HttpStatus.OK);*/
-
+    public ResponseEntity<HttpResponse> getAllManufacturers(){
         return ResponseEntity.ok(
                 HttpResponse.builder()
                         .timeStamp(LocalDateTime.now())
@@ -37,7 +33,6 @@ public class ManufacturerResource {
                         .statusCode(HttpStatus.OK.value())
                         .build()
         );
-
     }
 
     @GetMapping("/manufacturers/findById/{id}")

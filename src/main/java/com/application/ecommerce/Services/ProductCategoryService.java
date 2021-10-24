@@ -6,7 +6,11 @@ import java.util.List;
 
 public interface ProductCategoryService {
 
-    public List<ProductCategory> getAllProductCategories();
+    List<ProductCategory> getAllProductCategories();
 
     ProductCategory findProductCategoryById(Long id);
+
+    ProductCategory addNewProductCategory(ProductCategory productCategory);
+    void updateProductCategoryById(Long id, ProductCategory productCategory);
+    void deleteProductCategoryById(Long id);
 }

@@ -10,16 +10,19 @@ public class ProductCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String CategoryName;
-    private Date CategoryNameAdded = new Date();
+    private Date CategoryCreated;
+    private Date CategoryModified;
     private Boolean isCategoryActive;
 
     public ProductCategory() {
     }
 
-    public ProductCategory(Long id, String categoryName, Date categoryNameAdded) {
+    public ProductCategory(Long id, String categoryName, Date categoryCreated, Date categoryModified, Boolean isCategoryActive) {
         this.id = id;
         CategoryName = categoryName;
-        CategoryNameAdded = categoryNameAdded;
+        CategoryCreated = categoryCreated;
+        CategoryModified = categoryModified;
+        this.isCategoryActive = isCategoryActive;
     }
 
     public Long getId() {
@@ -38,11 +41,27 @@ public class ProductCategory {
         CategoryName = categoryName;
     }
 
-    public Date getCategoryNameAdded() {
-        return CategoryNameAdded;
+    public Date getCategoryCreated() {
+        return CategoryCreated;
     }
 
-    public void setCategoryNameAdded(Date categoryNameAdded) {
-        CategoryNameAdded = categoryNameAdded;
+    public void setCategoryCreated(Date categoryCreated) {
+        CategoryCreated = categoryCreated;
+    }
+
+    public Date getCategoryModified() {
+        return CategoryModified;
+    }
+
+    public void setCategoryModified(Date categoryModified) {
+        CategoryModified = categoryModified;
+    }
+
+    public Boolean getCategoryActive() {
+        return isCategoryActive;
+    }
+
+    public void setCategoryActive(Boolean categoryActive) {
+        isCategoryActive = categoryActive;
     }
 }

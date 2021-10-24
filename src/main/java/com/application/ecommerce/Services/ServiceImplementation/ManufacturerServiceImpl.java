@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.Date;
@@ -18,24 +17,17 @@ import java.util.List;
 @Transactional
 public class ManufacturerServiceImpl implements ManufacturerService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-
-    private ManufacturerRepository manufacturerRepository;
-    private final EntityManager entityManager;
+    private final ManufacturerRepository manufacturerRepository;
 
     @Autowired
-    public ManufacturerServiceImpl(ManufacturerRepository manufacturerRepository, EntityManager entityManager) {
+    public ManufacturerServiceImpl(ManufacturerRepository manufacturerRepository) {
         this.manufacturerRepository = manufacturerRepository;
-        this.entityManager = entityManager;
     }
 
     @Override
-    public List<ProductManufacturer> getAllManufacturers() {return manufacturerRepository.findAll();}
-
-/*    @Override
-    public ProductManufacturer findById(Long Id){
-        return manufacturerRepository.findById(Id);
-    }*/
-
+    public List<ProductManufacturer> getAllManufacturers() {
+        return manufacturerRepository.findAll();
+    }
 
     @Override
     public ProductManufacturer addNewManufacturer(String manufacturerName){
@@ -57,26 +49,6 @@ public class ManufacturerServiceImpl implements ManufacturerService {
             return productManufacturer;
         }
     }
-
-/*
-    @Override
-    public ProductManufacturer findManufacturerById(Long id) {
-
-        Query q = entityManager.createNativeQuery("SELECT pm.id AS id,pm.product_manufacturer_name AS productManufacturerName,pm.product_manufacturer_created AS productManufacturerCreated FROM product_manufacturer pm","findManufacturerById");
-        var query = "SELECT pm.id AS id,pm.product_manufacturer_name AS productManufacturerName,pm.product_manufacturer_created AS productManufacturerCreated FROM product_manufacturer pm";
-        ProductManufacturer manufacturer = entityManager.createNativeQuery(query, "findManufacturerById").getSingleResult();
-
-        if (manufacturer == null){
-            throw new EntityNotFoundException("Manufacturer with ID " + id + "Was NOT found in the database");
-        } else {
-            return manufacturer;
-        }
-
-    }
-
-*/
-
-
 
     //TODO add deleteManufacturerById
     //TODO Add method for updateManufacturerById

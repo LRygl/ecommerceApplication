@@ -22,13 +22,9 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepository;
-    private ManufacturerRepository manufacturerRepository;
-
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, ManufacturerRepository manufacturerRepository) {
-        this.manufacturerRepository = manufacturerRepository;
-
+    public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
