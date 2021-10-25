@@ -14,11 +14,11 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CategoryServiceImpl implements ProductCategoryService {
+public class ProductCategoryServiceImpl implements ProductCategoryService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private ProductCategoryRepository productCategoryRepository;
 
-    public CategoryServiceImpl(ProductCategoryRepository productCategoryRepository) {
+    public ProductCategoryServiceImpl(ProductCategoryRepository productCategoryRepository) {
         this.productCategoryRepository = productCategoryRepository;
     }
 

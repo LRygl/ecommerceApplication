@@ -2,9 +2,7 @@ package com.application.ecommerce.Resources;
 
 import com.application.ecommerce.Model.HttpResponse;
 import com.application.ecommerce.Model.ProductCategory;
-import com.application.ecommerce.Model.ProductColour;
 import com.application.ecommerce.Services.ProductCategoryService;
-import org.apache.tomcat.util.http.parser.HttpParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -64,6 +62,7 @@ public class ProductCategoryResource {
                         .build()
         );
     }
+
     @PutMapping(value = "category/update/{id}")
     public ResponseEntity<HttpResponse> updateProductColour(@RequestBody ProductCategory productCategory, @PathVariable Long id){
         productCategoryService.updateProductCategoryById(id,productCategory);
